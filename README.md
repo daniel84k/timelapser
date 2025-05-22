@@ -17,8 +17,41 @@
 
 - Python 3.8+
 - Virtualenv (zalecane)
+- Biblioteki Pythona (patrz `requirements.txt`)
+- **gphoto2** – do sterowania aparatem
 
-Zainstaluj zależności:
+### 📷 Instalacja `gphoto2`
+
+#### macOS (Homebrew):
+
+```bash
+brew install gphoto2
+```
+
+#### Linux (Debian/Ubuntu):
+
+```bash
+sudo apt update
+sudo apt install gphoto2
+```
+
+#### Windows:
+
+Na Windowsie `gphoto2` nie działa natywnie. Aby użyć aplikacji:
+
+- Skonfiguruj **Windows Subsystem for Linux (WSL)** z Ubuntu:
+  - [Oficjalna instrukcja WSL](https://learn.microsoft.com/pl-pl/windows/wsl/install)
+- Następnie zainstaluj `gphoto2` w WSL:
+
+```bash
+sudo apt update
+sudo apt install gphoto2
+```
+
+### 📦 Instalacja zależności Pythona
+
+Po aktywacji środowiska virtualenv:
+
 ```bash
 pip install -r requirements.txt
 ```
@@ -79,3 +112,4 @@ Max shutter times for each lens with rule 600
 ## 📄 Licencja
 
 Projekt na licencji MIT – używaj, rozwijaj i dziel się!
+
