@@ -1,26 +1,26 @@
 # 📸 Timelapser
 
-**Timelapser** to narzędzie w Pythonie do automatycznego wykonywania zdjęć typu **timelapse** lub **startrails** z dynamicznie dobieranymi parametrami w zależności od położenia Słońca i ustawień użytkownika.
+**Timelapser** is a Python tool for automatically capturing **timelapse** or **startrails** photos with dynamic settings based on the position of the Sun and user preferences.
 
-## 🚀 Funkcje
+## 🚀 Features
 
-- Automatyczne wyliczanie parametrów ekspozycji na podstawie danych astronomicznych
-- Dwa tryby działania:
-  - `timelapse` – zdjęcia w równych odstępach z dynamiczną ekspozycją
-  - `startrails` – zdjęcia z długim czasem naświetlania i przerwami
-- Tryb symulacji (bez robienia zdjęć – zapis do pliku)
-- Obsługa różnych lokalizacji i formatów plików
-- Lista obsługiwanych ogniskowych i przysłon
-- Wsparcie dla zasady 500/600 (smugi gwiazd)
+- Automatically calculates exposure settings based on astronomical data
+- Two modes of operation:
+  - `timelapse` – captures photos at regular intervals with dynamic exposure
+  - `startrails` – captures long-exposure photos with user-defined parameters
+- Simulation mode (logs parameters to CSV without capturing photos)
+- Supports multiple shooting locations and file formats
+- Customizable lens focal lengths and apertures
+- 500/600 rule support for star trail prevention
 
-## 🛠️ Wymagania
+## 🛠️ Requirements
 
 - Python 3.8+
-- Virtualenv (zalecane)
-- Biblioteki Pythona (patrz `requirements.txt`)
-- **gphoto2** – do sterowania aparatem
+- Virtualenv (recommended)
+- Python dependencies (see `requirements.txt`)
+- **gphoto2** – for camera control
 
-### 📷 Instalacja `gphoto2`
+### 📷 Installing `gphoto2`
 
 #### macOS (Homebrew):
 
@@ -37,63 +37,63 @@ sudo apt install gphoto2
 
 #### Windows:
 
-Na Windowsie `gphoto2` nie działa natywnie. Aby użyć aplikacji:
+`gphoto2` does not work natively on Windows. To use this application:
 
-- Skonfiguruj **Windows Subsystem for Linux (WSL)** z Ubuntu:
-  - [Oficjalna instrukcja WSL](https://learn.microsoft.com/pl-pl/windows/wsl/install)
-- Następnie zainstaluj `gphoto2` w WSL:
+- Set up **Windows Subsystem for Linux (WSL)** with Ubuntu:
+  - [Official WSL Installation Guide](https://learn.microsoft.com/en-us/windows/wsl/install)
+- Then install `gphoto2` in WSL:
 
 ```bash
 sudo apt update
 sudo apt install gphoto2
 ```
 
-### 📦 Instalacja zależności Pythona
+### 📦 Installing Python dependencies
 
-Po aktywacji środowiska virtualenv:
+After activating your virtual environment:
 
 ```bash
 pip install -r requirements.txt
 ```
 
-## 🧪 Uruchomienie (przykład)
+## 🧪 Example Usage
 
 ```bash
 python3 main.py --start-time 20:30 --duration 2 --mode timelapse --interval 5 --location location1
 ```
 
-Tryb startrails:
+Startrails mode:
 
 ```bash
 python3 main.py --mode startrails --exposure 30 --gap 5 --iso 800 --focal 35 --aperture 2.8
 ```
 
-Tryb symulacji:
+Simulation mode:
 
 ```bash
 python3 main.py --simulation --duration 1
 ```
 
-## ⚙️ Parametry
+## ⚙️ Arguments
 
-| Parametr        | Opis |
-|-----------------|------|
-| `--start-time`  | Godzina rozpoczęcia sesji (np. `22:00`) |
-| `--duration`    | Czas trwania sesji (w godzinach) |
-| `--mode`        | `timelapse` lub `startrails` |
-| `--simulation`  | Symulacja bez robienia zdjęć |
-| `--interval`    | Odstęp między zdjęciami (dla timelapse) |
-| `--exposure`    | Czas naświetlania (dla startrails) |
-| `--gap`         | Przerwa między zdjęciami (dla startrails) |
-| `--iso`         | Czułość ISO |
-| `--focal`       | Ogniskowa (np. 35 mm) |
-| `--aperture`    | Przysłona (np. 2.8) |
-| `--rule`        | Reguła 500 lub 600 |
-| `--location`    | Lokalizacja (`location1` lub `location2`) |
-| `--format`      | Format zdjęć (`raw`, `jpg`, `raw+jpg`) |
-| `--output`      | Folder zapisu zdjęć |
+| Argument         | Description |
+|------------------|-------------|
+| `--start-time`   | Session start time (e.g. `22:00`) |
+| `--duration`     | Duration of the session in hours |
+| `--mode`         | `timelapse` or `startrails` |
+| `--simulation`   | Run in simulation mode (no photos taken) |
+| `--interval`     | Interval between photos (timelapse mode) |
+| `--exposure`     | Exposure time in seconds (startrails mode) |
+| `--gap`          | Gap between shots in seconds (startrails mode) |
+| `--iso`          | ISO setting |
+| `--focal`        | Focal length in mm (e.g. 35) |
+| `--aperture`     | Aperture value (e.g. 2.8) |
+| `--rule`         | Star trail rule: 500 or 600 |
+| `--location`     | Shooting location (`location1` or `location2`) |
+| `--format`       | File format: `raw`, `jpg`, or `raw+jpg` |
+| `--output`       | Output folder for photos |
 
-## 📝 Przykład działania
+## 📝 Example Output
 
 ```
 Max shutter times for each lens with rule 600
@@ -105,11 +105,11 @@ Max shutter times for each lens with rule 600
 
 ## 🔧 TODO
 
-- Interfejs GUI
-- Obsługa dodatkowych lokalizacji i języków
-- Wizualizacja harmonogramu ekspozycji
+- GUI interface
+- Support for additional locations and languages
+- Visualization of exposure schedule
 
-## 📄 Licencja
+## 📄 License
 
-Projekt na licencji MIT – używaj, rozwijaj i dziel się!
+MIT License – feel free to use, modify, and share!
 
