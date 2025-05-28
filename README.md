@@ -1,115 +1,94 @@
-# 📸 Timelapser
+# 📷 Timelapser — Automated Night Photography, Timelapse & Startrails Script
 
-**Timelapser** is a Python tool for automatically capturing **timelapse** or **startrails** photos with dynamic settings based on the position of the Sun and user preferences.
+**Timelapser** is a Python tool for automating **timelapse** and **startrails** photography, dynamically adjusting exposure settings based on the Sun's altitude. It uses `gphoto2` to control a DSLR or mirrorless camera and also supports simulation mode for planning shots.
 
-## 🚀 Features
+## 🔧 Requirements
 
-- Automatically calculates exposure settings based on astronomical data
-- Two modes of operation:
-  - `timelapse` – captures photos at regular intervals with dynamic exposure
-  - `startrails` – captures long-exposure photos with user-defined parameters
-- Simulation mode (logs parameters to CSV without capturing photos)
-- Supports multiple shooting locations and file formats
-- Customizable lens focal lengths and apertures
-- 500/600 rule support for star trail prevention
+- Python 3.7+
+- A camera supported by `gphoto2`
+- Python packages:
+  - `astral`
+  - `pytz`
 
-## 🛠️ Requirements
-
-- Python 3.8+
-- Virtualenv (recommended)
-- Python dependencies (see `requirements.txt`)
-- **gphoto2** – for camera control
-
-### 📷 Installing `gphoto2`
-
-#### macOS (Homebrew):
-
-```bash
-brew install gphoto2
-```
-
-#### Linux (Debian/Ubuntu):
-
-```bash
-sudo apt update
-sudo apt install gphoto2
-```
-
-#### Windows:
-
-`gphoto2` does not work natively on Windows. To use this application:
-
-- Set up **Windows Subsystem for Linux (WSL)** with Ubuntu:
-  - [Official WSL Installation Guide](https://learn.microsoft.com/en-us/windows/wsl/install)
-- Then install `gphoto2` in WSL:
-
-```bash
-sudo apt update
-sudo apt install gphoto2
-```
-
-### 📦 Installing Python dependencies
-
-After activating your virtual environment:
-
+Install dependencies:
 ```bash
 pip install -r requirements.txt
 ```
 
-## 🧪 Example Usage
+## 🚀 Usage
 
+### Timelapse mode — capture images at regular intervals
 ```bash
-python3 main.py --start-time 20:30 --duration 2 --mode timelapse --interval 5 --location location1
+python3 exposure_test.py --mode timelapse --duration 2 --interval 300 --location teresin
 ```
 
-Startrails mode:
+**Parameters:**
+- `--duration` — duration in hours
+- `--interval` — interval (in seconds) between the start of each photo
+- `--location` — predefined location (`teresin` or `tivoli`)
+- `--focal` — focal length in mm (default: 35mm)
+- `--rule` — rule of 500 or 600 to calculate max night exposure
+- `--gradient` — (optional) enables gradual exposure transition between day and night
 
+---
+
+### Startrails mode — long exposures in sequence
 ```bash
-python3 main.py --mode startrails --exposure 30 --gap 5 --iso 800 --focal 35 --aperture 2.8
+python3 exposure_test.py --mode startrails --duration 1 --exposure 30 --gap 5 --iso 800 --location teresin
 ```
 
-Simulation mode:
+**Parameters:**
+- `--exposure` — exposure time in seconds
+- `--gap` — gap between shots in seconds
+- `--iso` — fixed ISO setting
+- `--duration` — duration in hours
 
+---
+
+### Simulation mode — test exposure without taking photos
 ```bash
-python3 main.py --simulation --duration 1
+python3 exposure_test.py --simulation --altitude -5 --focal 35 --location teresin --rule 600
 ```
 
-## ⚙️ Arguments
+Displays suggested shutter speed and ISO for a given Sun altitude.
 
-| Argument         | Description |
-|------------------|-------------|
-| `--start-time`   | Session start time (e.g. `22:00`) |
-| `--duration`     | Duration of the session in hours |
-| `--mode`         | `timelapse` or `startrails` |
-| `--simulation`   | Run in simulation mode (no photos taken) |
-| `--interval`     | Interval between photos (timelapse mode) |
-| `--exposure`     | Exposure time in seconds (startrails mode) |
-| `--gap`          | Gap between shots in seconds (startrails mode) |
-| `--iso`          | ISO setting |
-| `--focal`        | Focal length in mm (e.g. 35) |
-| `--aperture`     | Aperture value (e.g. 2.8) |
-| `--rule`         | Star trail rule: 500 or 600 |
-| `--location`     | Shooting location (`location1` or `location2`) |
-| `--format`       | File format: `raw`, `jpg`, or `raw+jpg` |
-| `--output`       | Output folder for photos |
+---
 
-## 📝 Example Output
+## 📂 Output
+
+Photos are saved in the directory: `output/YYYYMMDD_HHMM_<location>/` with the following format:
 
 ```
-Max shutter times for each lens with rule 600
- - 14mm: 42.86 s
- - 15mm: 40.00 s
- - 17mm: 35.29 s
+IMG_0001.jpg
+IMG_0001.nef
 ...
 ```
 
-## 🔧 TODO
+---
 
-- GUI interface
-- Support for additional locations and languages
-- Visualization of exposure schedule
+## 🔋 Extra Features
 
-## 📄 License
+- Battery level check with warning under 15%
+- Support for RAW + JPG downloads
+- Automatic exposure adjustment based on sunlight elevation
 
-MIT License – feel free to use, modify, and share!
+---
 
+## 📈 Roadmap / Ideas
+
+- Support for custom GPS locations or config files
+- Precise scheduling based on sunrise/sunset
+- GUI or web-based configuration panel
+- Cloud backup or file syncing support
+
+---
+
+## 🧑‍💻 Author
+
+Project created by [daniel84k](https://github.com/daniel84k), astrophotography enthusiast.
+
+---
+
+## 📝 License
+
+MIT License
